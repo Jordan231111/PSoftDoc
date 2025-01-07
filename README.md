@@ -66,12 +66,12 @@ This ensures your project matches the professor’s requirement.
 ---
 
 ### 5. **Download and Replace the Default `build.gradle`**
-Download the `build.gradle` file from [this GitHub repository](https://github.com/SamsTheNerd/psoft-vscode-gradle-lore/blob/main/build.gradle).
+Download the `build.gradle` file from [this GitHub repository](https://github.com/Jordan231111/PSoftDoc).
 
 #### Use `wget` to Download `build.gradle`:
 Run this command in your terminal:
 ```bash
-wget -O build.gradle https://raw.githubusercontent.com/SamsTheNerd/psoft-vscode-gradle-lore/main/build.gradle
+wget -O build.gradle https://raw.githubusercontent.com/Jordan231111/PSoftDoc/refs/heads/main/build.gradle
 ```
 
 The downloaded `build.gradle` file looks like this (for reference):
