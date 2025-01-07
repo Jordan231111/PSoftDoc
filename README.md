@@ -2,7 +2,7 @@ Here’s the updated **Sam's Guide to the Gradliest VSCode** with **Step 6 remov
 
 ---
 
-# Sam's Guide to the Gradliest VSCode
+# Guide to the Gradliest VSCode
 
 This guide will help you set up a Visual Studio Code (VSCode) environment using Gradle for working with Java in **psoft**, specifically for your cloned repository.
 
