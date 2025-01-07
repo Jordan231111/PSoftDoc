@@ -1,0 +1,73 @@
+// Apply plugins
+plugins {
+    id 'application' // Plugin for running the app
+    id 'java'        // Java plugin for compiling and testing
+    id 'jacoco'      // Plugin for code coverage
+}
+
+// Repository for dependencies
+repositories {
+    // Use Maven Central for resolving dependencies
+    mavenCentral()
+}
+
+// Set the main class for the application
+application {
+    // This is the fully qualified name of the class with the `main` method
+    // So src/main/java/hw0/folder/anotherFolder/RandomHello.java would be hw0.folder.anotherFolder.RandomHello
+
+    mainClass = 'hw0.RandomHello' // Update this for your project!
+}
+
+// Declare dependencies
+dependencies {
+    // Use JUnit 5 for testing
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testImplementation 'org.hamcrest:hamcrest:3.0' // Needed for certain assignments
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.0'
+}
+
+// Configure the test task to use JUnit Platform
+tasks.test {
+    useJUnitPlatform()
+}
+
+// Configure Jacoco for code coverage
+jacocoTestReport {
+    dependsOn tasks.test // Ensure tests run before generating the coverage report
+    reports {
+        xml.required = true  // Generate XML report for CI tools
+        html.required = true // Generate HTML report for manual review
+    }
+}
+
+// Ensure compatibility with modern Gradle versions
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21) // Update for your Java version
+    }
+}
+
+// Safely ignore the 'app' or 'App' directory if it exists
+afterEvaluate {
+    if (file('app').exists() || file('App').exists()) {
+        println "Detected 'app' or 'App' directory. Ignoring it in the Gradle configuration."
+        subprojects.removeIf { it.name.equalsIgnoreCase('app') }
+    }
+}
+
+// Automatically comment out include('app') in settings.gradle
+gradle.beforeProject {
+    def settingsFile = file("${rootProject.projectDir}/settings.gradle")
+    if (settingsFile.exists()) {
+        def lines = settingsFile.readLines()
+        def updatedLines = lines.collect { line ->
+            // Check for include('app') and comment it if not already commented
+            line.contains("include('app')") && !line.trim().startsWith('//') ? "// $line" : line
+        }
+        settingsFile.text = updatedLines.join('\n')
+        println "Checked and updated settings.gradle to comment out include('app') if present."
+    } else {
+        println 'No settings.gradle file found in the project root.'
+    }
+}
