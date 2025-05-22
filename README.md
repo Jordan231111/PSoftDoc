@@ -1,4 +1,4 @@
-Here’s the updated **Sam's Guide to the Gradliest VSCode** with **Step 6 removed** and adjustments based on the provided `build.gradle` file for further clarification. 
+Here's the updated **Sam's Guide to the Gradliest VSCode** with **Step 6 removed** and adjustments based on the provided `build.gradle` file for further clarification. This guide is updated for Java 21 and Gradle 8.14 (as of 2025).
 
 ---
 
@@ -34,7 +34,7 @@ After cloning, your directory structure will look like this:
 ---
 
 ### 2. **Rename the Folder to Match the Required Project Name**
-The professor’s notes specify that the project folder should be named `csci2600-HW_Name` (e.g., `csci2600-hw0` for homework 0). To meet this requirement, rename the `yej6` folder accordingly.
+The professor's notes specify that the project folder should be named `csci2600-HW_Name` (e.g., `csci2600-hw0` for homework 0). To meet this requirement, rename the `yej6` folder accordingly.
 
 For example, if you're working on `hw00`, run:
 ```bash
@@ -50,7 +50,7 @@ Your directory structure should now look like:
         docs/
 ```
 
-This ensures your project matches the professor’s requirement.
+This ensures your project matches the professor's requirement.
 
 ---
 
@@ -126,6 +126,21 @@ jacocoTestReport {
 }
 ```
 
+**Note**: The updated Gradle configuration for Java 21 support (as of 2025) would use these updated dependencies:
+```groovy
+// Updated JUnit 5 dependencies for 2025
+testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2' 
+testImplementation 'org.hamcrest:hamcrest:3.0'
+testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
+
+// Java 21 toolchain support
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+```
+
 ---
 
 ### 6. **Set the Main Class**
@@ -147,9 +162,9 @@ This tells Gradle where to find the `public static void main(String[] args)` met
 ---
 
 ### 7. **Update Gradle Wrapper (if needed)**
-If your Java version is 20 or newer, update the Gradle wrapper to a compatible version:
+If your Java version is 21, update the Gradle wrapper to the compatible version 8.14:
 ```bash
-./gradlew wrapper --gradle-version 8.5
+./gradlew wrapper --gradle-version=8.14 && ./gradlew wrapper
 ```
 
 ---
@@ -208,13 +223,25 @@ Use Gradle commands to build, run, and test your project. Run these commands fro
 If your homework requires JavaFX, update your `build.gradle` file to include the JavaFX plugin and configuration:
 ```groovy
 plugins {
+    id 'application'
+    id 'java'
+    id 'jacoco'
     id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 javafx {
-    version = '22'
-    modules = ['javafx.controls']
+    version = '23.0.2'
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 ```
+
+---
+
+## Java 21 Features (Optional)
+Java 21 offers several powerful features you might want to use:
+
+- **Virtual Threads**: Lightweight threads for high-throughput applications
+- **Record Patterns**: For type-safe data extraction
+- **String Templates**: More readable string formatting (Preview feature)
 
 ---
 
@@ -230,6 +257,8 @@ javafx {
      ```
 3. **Submit and Grade on Submitty**:
    - Push your changes and click **Grade My Repository** to test your code on Submitty.
+4. **Troubleshooting**:
+   - If you see "Invalid source release: 21", update your IDE's Java version in Settings → Build, Execution, Deployment → Build Tools → Gradle → Gradle JVM.
 
 ---
 
