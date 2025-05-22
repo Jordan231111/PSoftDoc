@@ -167,6 +167,11 @@ If your Java version is 21, update the Gradle wrapper to the compatible version 
 ./gradlew wrapper --gradle-version=8.14 && ./gradlew wrapper
 ```
 
+If run into error that the gradlew is missing from ur project, run
+```bash
+gradle wrapper
+```
+
 ---
 
 ### 8. **Verify Directory Structure**
