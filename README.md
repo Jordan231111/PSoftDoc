@@ -19,7 +19,7 @@ This guide will help you set up a Visual Studio Code (VSCode) environment using 
 ### 1. **Git Clone Your Repository**
 Navigate to the directory where you want to clone the repository using `cd`. Then run this command:
 ```bash
-git clone https://submitty.cs.rpi.edu/git/s25/csci2600/HW_Folder/yej6
+git clone https://submitty.cs.rpi.edu/git/u25/csci2600/HW_Folder/yej6
 ```
 
 - Replace `HW_Folder` with the homework folder name (e.g., `hw00`, `hw01`).
